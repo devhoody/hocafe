@@ -1,0 +1,68 @@
+package com.hocafe.service;
+
+import com.hocafe.domain.Member;
+import com.hocafe.repository.MemberRepository;
+import com.hocafe.repository.MemoryMemberRepository;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class MemberServiceImpTest {
+
+    MemberServiceImp memberService;
+    MemoryMemberRepository memberRepository;
+
+    @BeforeEach
+    public void beforeEach(){
+        memberRepository = new MemoryMemberRepository();
+        memberService = new MemberServiceImp(memberRepository);
+    }
+
+    @Test
+    void 회원가입() {
+        //given
+        Member member1 = new Member();
+        member1.setName("hello");
+
+        //when
+        Long saveId = memberService.join(member1);
+
+        //then
+        Member saveMember = memberRepository.findById(saveId).get();
+        Assertions.assertThat(member1.getName()).isEqualTo(saveMember.getName());
+    }
+
+    @Test
+    void 중복_회원_처리(){
+        //given
+        Member member1 = new Member();
+        member1.setName("spring");
+        Member member2 = new Member();
+        member2.setName("spring");
+
+        //when
+        memberService.join(member1);
+
+        IllegalStateException e = assertThrows(IllegalStateException.class, () -> memberService.join(member2));
+
+        Assertions.assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다.");
+
+//        try {
+//            memberService.join(member2);
+//        } catch (IllegalStateException e) {
+//            Assertions.assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다.");
+//        }
+
+        //then
+    }
+
+    @Test
+    void findMembers() {
+    }
+
+    @Test
+    void findOne() {
+    }
+}
