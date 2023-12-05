@@ -2,11 +2,12 @@ package com.hocafe.service;
 
 import com.hocafe.domain.Member;
 import com.hocafe.repository.MemberRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
-
+@Transactional
 public class MemberServiceImp implements MemberService{
     private final MemberRepository memberRepository;
 
