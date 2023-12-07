@@ -32,7 +32,7 @@ public class MemberServiceImp implements MemberService{
 
     @Override
     public List<Member> findMembers() {
-        return null;
+        return memberRepository.findAll();
     }
 
     @Override
