@@ -1,5 +1,6 @@
 package com.hocafe;
 
+import com.hocafe.aop.TimeTraceAop;
 import com.hocafe.domain.Member;
 import com.hocafe.repository.JpaMemberRepository;
 import com.hocafe.repository.MemberRepository;
@@ -31,4 +32,9 @@ public class SpringConfig {
     public MemberRepository memberRepository(){
         return new JpaMemberRepository(em);
     }
+
+//    @Bean
+//    public TimeTraceAop timeTraceAop(){
+//        return new TimeTraceAop();
+//    }
 }
