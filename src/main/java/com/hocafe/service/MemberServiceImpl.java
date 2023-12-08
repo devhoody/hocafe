@@ -4,9 +4,13 @@ import com.hocafe.domain.Member;
 import com.hocafe.repository.MemberRepository;
 import com.hocafe.repository.MemoryMemberRepository;
 
-public class MemberServiceImpl implements MemberService{
+public class MemberServiceImpl implements MemberService {
 
-    MemberRepository memberRepository = new MemoryMemberRepository();
+    MemberRepository memberRepository;
+
+    public MemberServiceImpl(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
+    }
 
     @Override
     public void join(Member member) {

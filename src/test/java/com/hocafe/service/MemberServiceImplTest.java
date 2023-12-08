@@ -1,5 +1,6 @@
 package com.hocafe.service;
 
+import com.hocafe.config.AppConfig;
 import com.hocafe.domain.Member;
 import com.hocafe.repository.MemberRepository;
 import com.hocafe.repository.MemoryMemberRepository;
@@ -15,9 +16,10 @@ class MemberServiceImplTest {
     MemberService memberService;
 
     @BeforeEach
-    public void beforeEach(){
-        memberRepository = new MemoryMemberRepository();
-        memberService = new MemberServiceImpl(memberRepository);
+    public void beforeEach() {
+        AppConfig appConfig = new AppConfig();
+        memberRepository = appConfig.memberRepository();
+        memberService = appConfig.memberService();
     }
 
     @Test
