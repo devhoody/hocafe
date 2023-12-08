@@ -7,4 +7,5 @@ public interface MemberService {
 
     Member findMember(Long memberId);
 
+    Member findMemberByName(String name);
 }
