@@ -4,15 +4,21 @@ import com.hocafe.domain.Member;
 import com.hocafe.repository.MemberRepository;
 import com.hocafe.repository.MemoryMemberRepository;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class MemberServiceImplTest {
 
-    MemberService memberService = new MemberServiceImpl();
+    MemberRepository memberRepository;
+    MemberService memberService;
 
-    MemberRepository memberRepository = new MemoryMemberRepository();
+    @BeforeEach
+    public void beforeEach(){
+        memberRepository = new MemoryMemberRepository();
+        memberService = new MemberServiceImpl(memberRepository);
+    }
 
     @Test
     void join() {
