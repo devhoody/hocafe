@@ -1,11 +1,13 @@
 package com.hocafe.repository;
 
 import com.hocafe.domain.Member;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+@Component
 public class MemoryMemberRepository implements MemberRepository{
 
     private final Map<Long, Member> store = new HashMap<>();

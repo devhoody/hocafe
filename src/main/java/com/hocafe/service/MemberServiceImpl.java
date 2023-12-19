@@ -3,11 +3,15 @@ package com.hocafe.service;
 import com.hocafe.domain.Member;
 import com.hocafe.repository.MemberRepository;
 import com.hocafe.repository.MemoryMemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class MemberServiceImpl implements MemberService {
 
-    MemberRepository memberRepository;
+    private final MemberRepository memberRepository;
 
+    @Autowired
     public MemberServiceImpl(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
