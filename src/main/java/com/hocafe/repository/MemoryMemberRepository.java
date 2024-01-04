@@ -3,9 +3,7 @@ package com.hocafe.repository;
 import com.hocafe.domain.Member;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class MemoryMemberRepository implements MemberRepository{
 
@@ -25,6 +23,20 @@ public class MemoryMemberRepository implements MemberRepository{
     public Member findByName(String name) {
         Optional<Member> result = store.values().stream().filter(member -> member.getName().equals(name)).findAny();
         return result.get();
+    }
+
+    @Override
+    public List<Member> findAll() {
+        return new ArrayList<>(store.values());
+    }
+
+    @Override
+    public void delete(String name) {
+
+    }
+
+    @Override
+    public void edit(Member member) {
     }
 
 

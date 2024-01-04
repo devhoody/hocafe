@@ -5,6 +5,8 @@ import com.hocafe.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MemberServiceImpl implements MemberService {
 
@@ -27,5 +29,20 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public Member findMemberByName(String name) {
         return memberRepository.findByName(name);
+    }
+
+    @Override
+    public List<Member> findAll() {
+        return memberRepository.findAll();
+    }
+
+    @Override
+    public void delete(String name) {
+        memberRepository.delete(name);
+    }
+
+    @Override
+    public void edit(Member member) {
+        memberRepository.edit(member);
     }
 }

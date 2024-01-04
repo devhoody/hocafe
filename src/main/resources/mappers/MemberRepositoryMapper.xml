@@ -8,4 +8,26 @@
         insert into member(name, age)
         values (#{name}, #{age})
     </insert>
+
+    <select id="findAll">
+        select * from member
+    </select>
+
+    <select id="findByName" resultType="Member">
+        select * from member where `name` = #{name}
+    </select>
+
+    <delete id="delete"> <!-- 삭제는 반환값이 필요없음  -->
+        delete from member
+        where name=#{name}
+    </delete>
+
+    <update id="edit">
+        UPDATE `member`
+        <set>
+            <if test="name != null">`name` = #{name}</if>
+        </set>
+        WHERE `id` = #{id}
+    </update>
+
 </mapper>
