@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>회원목록</title>
+</head>
+<body>
+    <ul>
+        <li>회원목록</li>
+        <li th:each="l:${list}">
+            <span th:text="${l.name}"> 이름</span>
+            <span th:text="${l.age}"> 나이</span>
+        </li>
+    </ul>
+
+    <a href="/"></a>
+</body>
+</html>
