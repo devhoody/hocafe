@@ -2,6 +2,7 @@ package com.hocafe.controller;
 
 import com.hocafe.domain.Member;
 import com.hocafe.service.MemberService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @Controller
 @RequestMapping("/member")
 public class MemberController {
@@ -18,6 +20,7 @@ public class MemberController {
 
     @GetMapping("reg")
     public String reg() {
+        log.info("member reg");
         return "/member/reg";
     }
 
@@ -32,7 +35,7 @@ public class MemberController {
 
         memberService.join(member);
 
-        System.out.println("회원가입 완료 이름 = " + member.getName());
+        log.info("회원가입 완료 이름 : {}", member.getName());
         return "redirect:/";
     }
 
@@ -40,7 +43,7 @@ public class MemberController {
     public String list(Model model){
         List<Member> list = memberService.findAll();
         model.addAttribute("list", list);
-        System.out.println(list.size());
+        log.info("총 회원 수 : {}",list.size());
         return "/member/list";
     }
 
@@ -52,7 +55,7 @@ public class MemberController {
     @PostMapping("delete")
     public String del(@RequestParam("name") String name){
         memberService.delete(name);
-        System.out.println("    " + name + "   이(가) 삭제가 완료되었습니다.");
+        log.info("----- {} (이)가 정상적으로 탈퇴되었습니다.)", name);
         return "redirect:/";
     }
 
@@ -68,7 +71,7 @@ public class MemberController {
         findMember.setName(afterName);
         memberService.edit(findMember);
 
-        System.out.println("수정완료 이름 : " + afterName);
+        log.info("수정 완료 이름 : {}", afterName);
         return "redirect:/";
     }
 }
