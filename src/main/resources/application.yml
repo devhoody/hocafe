@@ -10,3 +10,15 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: none
+
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  mapper-locations: mappers/*Mapper.xml
+  type-aliases-package: com.hocafe.domain
+
+logging:
+  level:
+    root: info
+    com.hocafe: debug
