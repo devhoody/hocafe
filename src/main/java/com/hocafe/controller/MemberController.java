@@ -18,6 +18,11 @@ public class MemberController {
     @Autowired
     MemberService memberService;
 
+    @GetMapping
+    public String index(){
+        return "/member/index";
+    }
+
     @GetMapping("reg")
     public String reg() {
         log.info("member reg");
@@ -36,7 +41,7 @@ public class MemberController {
         memberService.join(member);
 
         log.info("회원가입 완료 이름 : {}", member.getName());
-        return "redirect:/";
+        return "redirect:/member";
     }
 
     @GetMapping("list")
@@ -56,7 +61,7 @@ public class MemberController {
     public String del(@RequestParam("name") String name){
         memberService.delete(name);
         log.info("----- {} (이)가 정상적으로 탈퇴되었습니다.)", name);
-        return "redirect:/";
+        return "redirect:/member";
     }
 
     @GetMapping("edit")
@@ -72,6 +77,6 @@ public class MemberController {
         memberService.edit(findMember);
 
         log.info("수정 완료 이름 : {}", afterName);
-        return "redirect:/";
+        return "redirect:/member";
     }
 }

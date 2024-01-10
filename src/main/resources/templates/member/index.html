@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="member" method="post">
+    <fieldset>
+        <div>
+            <label>제목</label>
+            <input type="text" name="title" placeholder="제목을 입력하세요.">
+        </div>
+        <div>
+            <label>본문</label>
+            <input type="text" name="content" placeholder="본문을 입력하세요,">
+        </div>
+    </fieldset>
+    <div>
+        <input type="submit" value="등록">
+        <input type="button" value="삭제">
+    </div>
+</form>
+<div>
+    <a href="/member/reg">멤버등록</a>
+    <a href="/member/list">회원목록</a>
+    <a href="/member/delete">회원삭제</a>
+    <a href="/member/edit">회원수정</a>
+</div>
+
+</body>
+</html>
