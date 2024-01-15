@@ -20,7 +20,7 @@ public class MemberController {
     private final MemberService memberService;
 
     @GetMapping
-    public String index(){
+    public String index() {
         return "/member/index";
     }
 
@@ -31,7 +31,7 @@ public class MemberController {
     }
 
     @PostMapping("reg")
-    public String reg(@ModelAttribute Member member){
+    public String reg(@ModelAttribute Member member) {
         memberService.join(member);
 
         log.info("회원가입 완료 이름 : {}", member.getName());
@@ -39,10 +39,10 @@ public class MemberController {
     }
 
     @GetMapping("list")
-    public String list(Model model){
+    public String list(Model model) {
         List<Member> list = memberService.findAll();
         model.addAttribute("list", list);
-        log.info("총 회원 수 : {}",list.size());
+        log.info("총 회원 수 : {}", list.size());
         return "/member/list";
     }
 
@@ -52,20 +52,20 @@ public class MemberController {
     }
 
     @PostMapping("delete")
-    public String del(@RequestParam("name") String name){
+    public String del(@RequestParam("name") String name) {
         memberService.delete(name);
         log.info("----- {} (이)가 정상적으로 탈퇴되었습니다.)", name);
         return "redirect:/member";
     }
 
     @GetMapping("edit")
-    public String edit(){
+    public String edit() {
         return "/member/edit";
     }
 
     @PostMapping("edit")
     public String edit(@RequestParam("beforeName") String beforeName,
-                       @RequestParam("afterName") String afterName){
+                       @RequestParam("afterName") String afterName) {
         Member findMember = memberService.findMemberByName(beforeName);
         findMember.setName(afterName);
         memberService.edit(findMember);
