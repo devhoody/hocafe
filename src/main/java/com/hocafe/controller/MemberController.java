@@ -2,6 +2,7 @@ package com.hocafe.controller;
 
 import com.hocafe.domain.Member;
 import com.hocafe.service.MemberService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,10 +14,10 @@ import java.util.List;
 @Slf4j
 @Controller
 @RequestMapping("/member")
+@RequiredArgsConstructor
 public class MemberController {
 
-    @Autowired
-    MemberService memberService;
+    private final MemberService memberService;
 
     @GetMapping
     public String index(){
@@ -30,14 +31,7 @@ public class MemberController {
     }
 
     @PostMapping("reg")
-    public String reg(@RequestParam("name") String name,
-                      @RequestParam("age") Long age){
-
-        Member member = Member.builder()
-                .name(name)
-                .age(age)
-                .build();
-
+    public String reg(@ModelAttribute Member member){
         memberService.join(member);
 
         log.info("회원가입 완료 이름 : {}", member.getName());
