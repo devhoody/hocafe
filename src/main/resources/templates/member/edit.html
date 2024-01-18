@@ -3,14 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+    <link href="/css/util.css" rel="stylesheet" type="text/css">
+    <script src="/js/member/edit.js"></script>
+
 </head>
 <body>
 <form action="edit" method="post">
-  <div>
+  <div class="name-box">
     <input type="text" name="beforeName" placeholder="수정 전 이름">
     <input type="text" name="afterName" placeholder="수정 후 이름">
     <input class="btn btn-main" type="submit" name="cmd" value="수정하기">
   </div>
+    <p id="dupli-name" class="d:none">없는 이름입니다.</p>
 </form>
 </body>
 </html>

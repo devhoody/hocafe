@@ -18,7 +18,7 @@ class MemoryMemberRepositoryTest {
     @Test
     void save() {
         // given
-        Member member = new Member(1L, "memberA");
+        Member member = new Member(1L, "memberA", 44L);
         //when
         memberRepository.save(member);
         //then
@@ -29,7 +29,7 @@ class MemoryMemberRepositoryTest {
     @Test
     void findById() {
         // given
-        Member member = new Member(1L, "memberA");
+        Member member = new Member(1L, "memberA", 44L);
 
         //when
         memberRepository.save(member);

@@ -12,20 +12,20 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MemberServiceImplTest {
 
-    MemberRepository memberRepository;
+    MemoryMemberRepository memberRepository;
     MemberService memberService;
 
     @BeforeEach
     public void beforeEach() {
-        AppConfig appConfig = new AppConfig();
-        memberRepository = appConfig.memberRepository();
-        memberService = appConfig.memberService();
+        this.memberRepository = new MemoryMemberRepository();
+        this.memberService = new MemberServiceImpl(memberRepository);
     }
 
     @Test
     void join() {
         //given
-        Member member = new Member(1L, "memberA");
+        Member member = new Member(1L, "memberA", 44L);
+
         //when
         memberService.join(member);
 
@@ -34,8 +34,4 @@ class MemberServiceImplTest {
         Assertions.assertThat(newOne.getName()).isEqualTo("memberA");
     }
 
-    @Test
-    void findMember() {
-
-    }
 }

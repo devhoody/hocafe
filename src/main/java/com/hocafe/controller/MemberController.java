@@ -17,6 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MemberController {
 
+
     private final MemberService memberService;
 
     @GetMapping
@@ -25,8 +26,8 @@ public class MemberController {
     }
 
     @GetMapping("reg")
-    public String reg() {
-        log.info("member reg");
+    public String reg(Model model) {
+        model.addAttribute("member", new Member());
         return "/member/reg";
     }
 

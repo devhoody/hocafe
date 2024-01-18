@@ -2,6 +2,7 @@ package com.hocafe.service;
 
 import com.hocafe.domain.Member;
 import com.hocafe.repository.MemberRepository;
+import com.hocafe.repository.MemoryMemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,9 +11,10 @@ import java.util.List;
 @Service
 public class MemberServiceImpl implements MemberService {
 
-    MemberRepository memberRepository;
+    MemoryMemberRepository memberRepository;
+
     @Autowired
-    public MemberServiceImpl(MemberRepository memberRepository) {
+    public MemberServiceImpl(MemoryMemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
 

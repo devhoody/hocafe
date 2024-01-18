@@ -4,12 +4,9 @@ import lombok.*;
 
 import java.util.Date;
 
-@Getter
-@Setter
-@ToString
-@Builder
+@Data
 @AllArgsConstructor
-@NoArgsConstructor
+@Builder
 public class Post {
     private Long id;
     private String title;
