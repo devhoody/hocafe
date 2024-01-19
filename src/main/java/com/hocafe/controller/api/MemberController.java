@@ -28,7 +28,7 @@ public class MemberController {
 
     @PutMapping("edit")
     public boolean edit(Member member){
-        System.out.println("변경할 member 이름 : " + member.getName());
+        System.out.println("변경할 member 이름 : " + member.getMemberName());
         service.edit(member);
         return true;
     }

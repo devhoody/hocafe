@@ -29,7 +29,7 @@ public class MemoryMemberRepository implements MemberRepository{
 
     @Override
     public Member findByName(String name) {
-        Optional<Member> result = store.values().stream().filter(member -> member.getName().equals(name)).findAny();
+        Optional<Member> result = store.values().stream().filter(member -> member.getMemberName().equals(name)).findAny();
         return result.get();
     }
 

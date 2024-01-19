@@ -6,7 +6,7 @@ import lombok.*;
 @Builder
 public class Member {
     private Long id;
-    private String name;
+    private String memberName;
     private Long age;
 
     public Member() {
@@ -14,7 +14,7 @@ public class Member {
 
     public Member(Long id, String name, Long age) {
         this.id = id;
-        this.name = name;
+        this.memberName = name;
         this.age = age;
     }
 }
