@@ -1,22 +1,22 @@
 server:
   port: 8000
 
-spring:
-  datasource:
-    url: jdbc:h2:tcp://localhost/~/cafe
-    driver-class-name: org.h2.Driver
-    username: sa
-  jpa:
-    show-sql: true
-    hibernate:
-      ddl-auto: none
-
-
-mybatis:
-  configuration:
-    map-underscore-to-camel-case: true
-  mapper-locations: mappers/*Mapper.xml
-  type-aliases-package: com.hocafe.domain
+#spring:
+#  datasource:
+#    url: jdbc:h2:tcp://localhost/~/cafe
+#    driver-class-name: org.h2.Driver
+#    username: sa
+#  jpa:
+#    show-sql: true
+#    hibernate:
+#      ddl-auto: none
+#
+#
+#mybatis:
+#  configuration:
+#    map-underscore-to-camel-case: true
+#  mapper-locations: mappers/*Mapper.xml
+#  type-aliases-package: com.hocafe.domain
 
 logging:
   level:
