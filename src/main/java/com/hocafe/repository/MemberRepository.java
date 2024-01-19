@@ -7,7 +7,7 @@ import java.util.List;
 
 @Mapper
 public interface MemberRepository {
-    void save(Member member);
+    Member save(Member member);
 
     Member findById(Long memberId);
     Member findByName(String name);

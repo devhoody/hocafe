@@ -17,7 +17,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MemberController {
 
-
     private final MemberService memberService;
 
     @GetMapping
@@ -32,9 +31,11 @@ public class MemberController {
     }
 
     @PostMapping("reg")
-    public String reg(@ModelAttribute Member member) {
+    public String reg(@ModelAttribute Member member, Model model) {
         memberService.join(member);
 
+        List<Member> list = memberService.findAll();
+        model.addAttribute("list", list);
         log.info("회원가입 완료 이름 : {}", member.getName());
         return "redirect:/member";
     }
