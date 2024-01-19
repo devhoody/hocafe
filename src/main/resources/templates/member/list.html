@@ -1,19 +1,48 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>회원목록</title>
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <ul>
-        <li>회원목록</li>
-        <li th:each="l:${list}">
-            <span th:text="${l.name}"> 이름</span>
-            <span th:text="${l.age}"> 나이</span>
-        </li>
-    </ul>
+<div class="container" style="max-width: 600px">
+    <div class="py-5 text-center">
+        <h2>회원 목록</h2>
+    </div>
 
-    <a href="/"></a>
+    <div class="row">
+        <div class="col">
+            <button class="btn btn-primary float-end"
+                    onclick="location.href='addForm.html'"
+                    th:onclick="|location.href='@{/members/reg}'|"
+                    type="button"
+            >회원 등록</button>
+        </div>
+    </div>
+
+    <hr class="my-4">
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>회원이름</th>
+                <th>나이</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="member : ${members}">
+                <td><a href="item.html" th:text="${member.id}">회원id</a></td>
+                <td><a href="item.html" th:text="${member.memberName}">회원 이름</a></td>
+                <td th:text="${member.age}">나이</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div> <!-- /container -->
 </body>
+
 </html>
