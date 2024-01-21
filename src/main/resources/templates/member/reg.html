@@ -2,27 +2,50 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link th:href="@{/css/bootstrap.min.css}"
-          href="../css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
     <title>Title</title>
+    <link href="/css/util.css" rel="stylesheet" type="text/css">
+    <style>
+        .container {
+            max-width: 560px;
+        }
+    </style>
 </head>
 <body>
-<form action="reg" th:object="${member}" method="post">
-    <fieldset>
-        <div>
-            <label for="name" class="text">이름</label>
-            <input type="text" id="name" th:field="*{memberName}" placeholder="이름을 입력하세요.">
-        </div>
-        <div>
-            <label for="age" class="text">나이</label>
-            <input type="text" id="age" th:field="*{age}" class="text-box">
-        </div>
-    </fieldset>
-    <div>
-        <input type="submit" class="btn btn-main btn-reg" value="회원가입">
-        <button th:onclick="|location.href='@{/member}'|">취소</button>
-    </div>
-</form>
+<div class="container">
 
+    <div class="py-5 text-center">
+        <h2 th:text="#{page.addMember}">회원 등록 폼</h2>
+    </div>
+
+    <form action="member.html" th:action th:object="${member}" method="post">
+        <div>
+            <label for="memberName" th:text="#{label.member.memberName}">이름</label>
+            <input type="text" id="memberName" th:field="*{memberName}" class="form-control" th:placeholder="#{placeholder.memberName}" placeholder="이름을 입력하세요">
+            <div class="fcolor:red" th:errors="*{memberName}">이름 오류</div>
+        </div>
+        <div>
+            <label for="age" th:text="#{label.member.age}">나이</label>
+            <input type="text" id="age" th:field="*{age}" class="form-control" th:placeholder="#{placeholder.age}" placeholder="나이를 입력하세요">
+        </div>
+
+        <hr class="my-4">
+
+        <div class="row">
+            <div class="col">
+                <button class="w-100 btn btn-primary btn-lg" type="submit">회원가입</button>
+            </div>
+            <div class="col">
+                <button class="w-100 btn btn-secondary btn-lg"
+                        onclick="location.href='members.html'"
+                        th:onclick="|location.href='@{/members}'|"
+                        type="button"
+                        th:text="#{button.cancel}">취소</button>
+            </div>
+        </div>
+
+    </form>
+
+</div> <!-- /container -->
 </body>
 </html>
