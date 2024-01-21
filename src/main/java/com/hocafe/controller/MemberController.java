@@ -2,26 +2,38 @@ package com.hocafe.controller;
 
 import com.hocafe.domain.Member;
 import com.hocafe.service.MemberService;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
 @Slf4j
 @Controller
-@RequestMapping("/member")
+@RequestMapping("/members")
 @RequiredArgsConstructor
 public class MemberController {
 
     private final MemberService memberService;
 
+    @PostConstruct
+    public void init(){
+        memberService.join(new Member(1L,"memberA",10L));
+        memberService.join(new Member(2L,"memberB",20L));
+    }
+
     @GetMapping
-    public String index() {
-        return "/member/index";
+    public String index(Model model) {
+        List<Member> list = memberService.findAll();
+        model.addAttribute("members", list);
+        return "/member/list";
     }
 
     @GetMapping("reg")
@@ -31,13 +43,37 @@ public class MemberController {
     }
 
     @PostMapping("reg")
-    public String reg(@ModelAttribute Member member, Model model) {
-        memberService.join(member);
+    public String reg(@ModelAttribute Member member, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
 
-        List<Member> list = memberService.findAll();
-        model.addAttribute("list", list);
-        log.info("회원가입 완료 이름 : {}", member.getName());
-        return "redirect:/member";
+        log.info("memberName = {}", member.getMemberName());
+
+        // 이름 빈 문자열
+        if(!StringUtils.hasText(member.getMemberName())){
+            bindingResult.rejectValue("memberName","required.member.memberName",null);
+        }
+        //나이 : 숫자가 아닌 한글 출력시 오류 처리
+
+        if(bindingResult.hasErrors()){
+            log.info("errors ={}", bindingResult);
+            return "member/reg";
+        }
+
+        Member savedMember = memberService.join(member);
+        log.info("memberId ={}", savedMember.getId());
+
+        model.addAttribute("member", savedMember);
+        redirectAttributes.addAttribute("memberId", savedMember.getId());
+        redirectAttributes.addAttribute("status", true);
+        log.info("회원가입 완료 이름 : {}", member.getMemberName());
+        return "redirect:/members/{memberId}";
+    }
+
+    @GetMapping("{memberId}")
+    public String member(@PathVariable(name = "memberId") Long memberId, Model model){
+        log.info("세부사항 멤버 ID = {}", memberId);
+        Member findMember = memberService.findMember(memberId);
+        model.addAttribute("member", findMember);
+        return "/member/member";
     }
 
     @GetMapping("list")
@@ -69,7 +105,7 @@ public class MemberController {
     public String edit(@RequestParam("beforeName") String beforeName,
                        @RequestParam("afterName") String afterName) {
         Member findMember = memberService.findMemberByName(beforeName);
-        findMember.setName(afterName);
+        findMember.setMemberName(afterName);
         memberService.edit(findMember);
 
         log.info("수정 완료 이름 : {}", afterName);
