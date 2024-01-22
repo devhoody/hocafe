@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -44,18 +45,18 @@ public class MemberController {
 
     @PostMapping("reg")
     public String reg(@ModelAttribute Member member, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
-
-        log.info("memberName = {}", member.getMemberName());
-
-        // 이름 빈 문자열
         if(!StringUtils.hasText(member.getMemberName())){
-            bindingResult.rejectValue("memberName","required.member.memberName",null);
+            bindingResult.addError(new FieldError("member", "memberName", member.getMemberName(), false, null, null,  "이름은 필수입니다."));
         }
-        //나이 : 숫자가 아닌 한글 출력시 오류 처리
+        //나이
+        if(member.getAge() == null){
+            bindingResult.addError(new FieldError("member", "age", member.getAge(), false, null, null, "나이는 필수입니다."));
+        }
 
+        //검증 실패시 리턴하기
         if(bindingResult.hasErrors()){
-            log.info("errors ={}", bindingResult);
-            return "member/reg";
+            log.info("BidingResult ={}", bindingResult);
+            return "/member/reg";
         }
 
         Member savedMember = memberService.join(member);

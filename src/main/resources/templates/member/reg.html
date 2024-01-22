@@ -9,6 +9,10 @@
         .container {
             max-width: 560px;
         }
+        .field-error {
+            border-color: #dc3545;
+            color: #dc3545;
+        }
     </style>
 </head>
 <body>
@@ -19,14 +23,20 @@
     </div>
 
     <form action="member.html" th:action th:object="${member}" method="post">
+
         <div>
             <label for="memberName" th:text="#{label.member.memberName}">이름</label>
-            <input type="text" id="memberName" th:field="*{memberName}" class="form-control" th:placeholder="#{placeholder.memberName}" placeholder="이름을 입력하세요">
+            <input type="text" id="memberName" th:field="*{memberName}"
+                   th:errorclass="field-error"
+                   class="form-control" th:placeholder="#{placeholder.memberName}" placeholder="이름을 입력하세요">
             <div class="fcolor:red" th:errors="*{memberName}">이름 오류</div>
         </div>
         <div>
             <label for="age" th:text="#{label.member.age}">나이</label>
-            <input type="text" id="age" th:field="*{age}" class="form-control" th:placeholder="#{placeholder.age}" placeholder="나이를 입력하세요">
+            <input type="text" id="age" th:field="*{age}"
+                   th:errorclass="field-error"
+                   class="form-control" th:placeholder="#{placeholder.age}" placeholder="나이를 입력하세요">
+            <div class="fcolor:red" th:errors="*{age}">나이 오류</div>
         </div>
 
         <hr class="my-4">
