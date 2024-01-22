@@ -96,19 +96,18 @@ public class MemberController {
         return "redirect:/member";
     }
 
-    @GetMapping("edit")
-    public String edit() {
-        return "/member/edit";
+    @GetMapping("{memberId}/edit")
+    public String edit(@PathVariable(name = "memberId") Long memberId, Model model) {
+        log.info("memberId = {}", memberId);
+        Member member = memberService.findMember(memberId);
+        log.info("findMemberId = {}", member.getId());
+        model.addAttribute("member", member);
+        return "member/edit";
     }
 
-    @PostMapping("edit")
-    public String edit(@RequestParam("beforeName") String beforeName,
-                       @RequestParam("afterName") String afterName) {
-        Member findMember = memberService.findMemberByName(beforeName);
-        findMember.setMemberName(afterName);
-        memberService.edit(findMember);
+    @PostMapping("{memberId}/edit")
+    public String edit(@PathVariable Long memberId, @ModelAttribute Member member) {
 
-        log.info("수정 완료 이름 : {}", afterName);
-        return "redirect:/member";
+        return "redirect:/members";
     }
 }

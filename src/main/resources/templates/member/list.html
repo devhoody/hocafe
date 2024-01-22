@@ -27,15 +27,15 @@
         <table class="table">
             <thead>
             <tr>
-                <th>ID</th>
-                <th>회원이름</th>
-                <th>나이</th>
+                <th th:text="#{label.member.id}">ID</th>
+                <th th:text="#{label.member.memberName}">회원이름</th>
+                <th th:text="#{label.member.age}">나이</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="member : ${members}">
-                <td><a href="item.html" th:text="${member.id}">회원id</a></td>
-                <td><a href="item.html" th:text="${member.memberName}">회원 이름</a></td>
+                <td><a href="member.html" th:href="@{|/members/${member.id}|}" th:text="${member.id}">회원id</a></td>
+                <td><a href="member.html" th:href="@{|/members/${member.id}|}" th:text="${member.memberName}">회원 이름</a></td>
                 <td th:text="${member.age}">나이</td>
             </tr>
             </tbody>
