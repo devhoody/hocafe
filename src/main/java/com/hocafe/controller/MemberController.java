@@ -46,12 +46,18 @@ public class MemberController {
     @PostMapping("reg")
     public String reg(@ModelAttribute Member member, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
         if(!StringUtils.hasText(member.getMemberName())){
-            bindingResult.addError(new FieldError("member", "memberName", member.getMemberName(), false, null, null,  "이름은 필수입니다."));
+//            bindingResult.addError(new FieldError("member", "memberName", member.getMemberName(), false, null, null,  "이름은 필수입니다."));
+//            bindingResult.addError(new FieldError("member", "memberName", member.getMemberName(), false, new String[]{"required.member.memberName"}, null,  "이름은 필수입니다."));
+            bindingResult.rejectValue("memberName","required");
         }
         //나이
         if(member.getAge() == null){
-            bindingResult.addError(new FieldError("member", "age", member.getAge(), false, null, null, "나이는 필수입니다."));
+//            bindingResult.addError(new FieldError("member", "age", member.getAge(), false, new String[]{"required.member.age"}, null, "나이는 필수입니다."));
+            bindingResult.rejectValue("age","required");
         }
+
+        log.info("objectName={}", bindingResult.getObjectName());
+        log.info("target={}", bindingResult.getTarget());
 
         //검증 실패시 리턴하기
         if(bindingResult.hasErrors()){
