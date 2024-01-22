@@ -106,8 +106,8 @@ public class MemberController {
     }
 
     @PostMapping("{memberId}/edit")
-    public String edit(@PathVariable Long memberId, @ModelAttribute Member member) {
-
-        return "redirect:/members";
+    public String edit(@PathVariable(name = "memberId") Long memberId, @ModelAttribute Member member) {
+        memberService.edit(memberId, member);
+        return "redirect:/members/{memberId}";
     }
 }

@@ -44,7 +44,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void edit(Member member) {
-        memberRepository.edit(member);
+    public void edit(Long memberId, Member member) {
+        memberRepository.edit(memberId, member);
     }
 }

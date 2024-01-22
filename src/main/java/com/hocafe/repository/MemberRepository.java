@@ -16,6 +16,5 @@ public interface MemberRepository {
 
     void delete(String name);
 
-    void edit(Member member);
-
+    void edit(Long memberId, Member member);
 }

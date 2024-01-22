@@ -2,7 +2,6 @@ package com.hocafe.repository;
 
 import com.hocafe.domain.Member;
 import org.springframework.context.annotation.Primary;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
@@ -44,7 +43,8 @@ public class MemoryMemberRepository implements MemberRepository{
     }
 
     @Override
-    public void edit(Member member) {
+    public void edit(Long memberId, Member member) {
+        store.put(memberId, member);
     }
 
 

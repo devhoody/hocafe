@@ -29,7 +29,7 @@ public class MemberController {
     @PutMapping("edit")
     public boolean edit(Member member){
         System.out.println("변경할 member 이름 : " + member.getMemberName());
-        service.edit(member);
+        service.edit(member.getId(), member);
         return true;
     }
 }
