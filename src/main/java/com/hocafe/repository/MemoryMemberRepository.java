@@ -38,8 +38,8 @@ public class MemoryMemberRepository implements MemberRepository{
     }
 
     @Override
-    public void delete(String name) {
-
+    public void delete(Long memberId) {
+        store.remove(memberId);
     }
 
     @Override

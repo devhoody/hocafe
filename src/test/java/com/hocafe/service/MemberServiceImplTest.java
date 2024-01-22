@@ -31,7 +31,7 @@ class MemberServiceImplTest {
 
         //then
         Member newOne = memberService.findMember(1L);
-        Assertions.assertThat(newOne.getName()).isEqualTo("memberA");
+        Assertions.assertThat(newOne.getMemberName()).isEqualTo("memberA");
     }
 
 }

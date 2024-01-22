@@ -15,7 +15,7 @@ public interface MemberService {
 
     List<Member> findAll();
 
-    void delete(String name);
+    void delete(Long memberId);
 
     void edit(Long memberId, Member member);
 }

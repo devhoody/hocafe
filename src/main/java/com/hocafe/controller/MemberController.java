@@ -68,6 +68,8 @@ public class MemberController {
         return "redirect:/members/{memberId}";
     }
 
+
+
     @GetMapping("{memberId}")
     public String member(@PathVariable(name = "memberId") Long memberId, Model model){
         log.info("세부사항 멤버 ID = {}", memberId);
@@ -84,18 +86,6 @@ public class MemberController {
         return "/member/list";
     }
 
-    @GetMapping("delete")
-    public String del() {
-        return "/member/delete";
-    }
-
-    @PostMapping("delete")
-    public String del(@RequestParam("name") String name) {
-        memberService.delete(name);
-        log.info("----- {} (이)가 정상적으로 탈퇴되었습니다.)", name);
-        return "redirect:/member";
-    }
-
     @GetMapping("{memberId}/edit")
     public String edit(@PathVariable(name = "memberId") Long memberId, Model model) {
         log.info("memberId = {}", memberId);
@@ -109,5 +99,12 @@ public class MemberController {
     public String edit(@PathVariable(name = "memberId") Long memberId, @ModelAttribute Member member) {
         memberService.edit(memberId, member);
         return "redirect:/members/{memberId}";
+    }
+
+    @DeleteMapping("{memberId}")
+    public String del(@PathVariable(name = "memberId") Long memberId) {
+        log.info("삭제되는 회원 이름 : {}", memberService.findMember(memberId).getMemberName());
+        memberService.delete(memberId);
+        return "redirect:/members";
     }
 }
