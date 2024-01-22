@@ -22,3 +22,7 @@ logging:
   level:
     root: info
     com.hocafe: debug
+
+spring:
+  messages:
+    basename: messages,errors
