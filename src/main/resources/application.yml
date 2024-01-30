@@ -26,3 +26,6 @@ logging:
 spring:
   messages:
     basename: messages,errors
+
+file:
+  dir:  /Users/eddy/Desktop/dev/project/cafe/cafe/src/main/resources/webapp/member/
