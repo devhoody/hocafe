@@ -37,6 +37,11 @@
 
   <hr class="my-4">
 
+  <div>
+    <label for="policyAgree">선택 약관 동의</label>
+    <input type="checkbox" id="policyAgree" th:field="${member.policyAgree}" disabled>
+  </div>
+
   <div class="row">
     <div class="col">
       <button class="w-100 btn btn-primary btn-lg"
@@ -51,14 +56,7 @@
               th:onclick="|location.href='@{/members}'|"
               type="button">목록으로</button>
     </div>
-    <div class="col">
-      <input class="w-100 btn btn-secondary btn-lg"
-              onclick="location.href='members.html'"
-              th:onclick="|location.href='@{/members}'|"
-              type="button">삭제</input>
-    </div>
   </div>
-
 </div> <!-- /container -->
 </body>
 </html>
