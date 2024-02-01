@@ -18,8 +18,17 @@ public class PostServiceImpl implements PostService{
     @Override
     public Post reg(Post post) {
         postRepository.save(post);
-        System.out.println("저장 완료");
         return post;
+    }
+
+    @Override
+    public Post findById(Long postId) {
+        return postRepository.findById(postId);
+    }
+
+    @Override
+    public List<Post> findAll() {
+        return postRepository.findAll();
     }
 
 }
