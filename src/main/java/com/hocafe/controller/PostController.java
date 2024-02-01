@@ -14,12 +14,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.ArrayList;
 import java.util.List;
 
-@Controller("postController")
-@RequestMapping("post")
+@Controller
+@RequestMapping("posts")
 @RequiredArgsConstructor
 public class PostController {
 
     private final PostService postService;
+
+    @GetMapping()
+    public String posts(Model model){
+        List<Post> list = postService.findAll();
+        model.addAttribute("posts", list);
+        return "/post/list";
+    }
 
     @ModelAttribute("regions")
     public List<Regions> regions(){
@@ -30,19 +37,11 @@ public class PostController {
     }
 
     @GetMapping("reg")
-    public String reg(){
-
+    public String reg(Model model){
+        Post post = new Post();
+        model.addAttribute("post", post);
         return "/post/reg";
     }
 
-    @PostMapping("reg")
-    public String reg(
-            String title,
-            String content
-    ){
-        Post post = Post.builder().title(title).content(content).build();
-        postService.reg(post);
 
-        return "redirect:list";
-    }
 }

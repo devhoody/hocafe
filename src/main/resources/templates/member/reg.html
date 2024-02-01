@@ -38,6 +38,10 @@
                    class="form-control" th:placeholder="#{placeholder.age}" placeholder="나이를 입력하세요">
             <div class="fcolor:red" th:errors="*{age}">나이 오류</div>
         </div>
+        <div>
+            <label for="policyAgree">선택 약관 동의</label>
+            <input type="checkbox" id="policyAgree" th:field="*{policyAgree}">
+        </div>
 
         <hr class="my-4">
 
