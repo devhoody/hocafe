@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link th:href="@{/css/bootstrap.min.css}"
+        href="../css/bootstrap.min.css" rel="stylesheet">
+  <title>카페 정보 입력</title>
+  <style>
+    .container {
+      max-width: 560px;
+    }
+    .field-error {
+      color: red;
+      border-color: red;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <div class="py-5 text-center">
+    <h2 th:text="#{page.addCafe}">상품 등록</h2>
+  </div>
+
+  <form action="/save" th:action th:object="${cafe}" method="post" enctype="multipart/form-data">
+    <div class="">
+      <label for="cafeName">카페 이름:</label><br>
+      <input class="form-control" type="text" id="cafeName" th:field="*{cafeName}" required><br>
+    </div>
+    <div>
+      <label for="address">카페 주소:</label><br>
+      <input class="form-control" type="text" id="address" th:field="*{address}" required><br>
+    </div>
+    <div>
+      <label for="mainImageFile">대표 이미지 파일:</label><br>
+      <input class="form-control" type="file" id="mainImageFile" th:field="*{mainImageFile}" required><br>
+    </div>
+    <div>
+      <label for="imageFiles">추가 이미지 파일:</label><br>
+      <input class="form-control" type="file" id="imageFiles" th:field="*{imageFiles}" multiple><br>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <button class="w-100 btn btn-primary btn-lg" type="submit" th:text="#{button.save}">카페 등록</button>
+      </div>
+      <div class="col">
+        <button class="w-100 btn btn-secondary btn-lg"
+                onclick="location.href='cafes.html'"
+                th:onclick="|location.href='@{/cafes}'|"
+                type="button" th:text="#{button.cancel}">취소</button>
+      </div>
+    </div>
+
+  </form>
+</div>
+</body>
+</html>

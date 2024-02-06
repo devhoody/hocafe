@@ -7,12 +7,8 @@ import java.util.List;
 @Data
 public class Cafe {
     private Long id;
-    private String cafeName;
-    private String oepnTime;
-    private String cloaseTime;
-    private String address;
-    private String phone;
-    private String mainMenu;
-    private UploadFile mainImage;
-    private List<UploadFile> basicImages;
+    private String cafeName; //카페 이름
+    private String address; //카페 주소
+    private UploadFile mainImageFile; // 카페 메인사진
+    private List<UploadFile> imageFiles; // 카페 이미지사진
 }
