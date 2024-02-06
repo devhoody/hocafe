@@ -10,7 +10,8 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: none
-
+  messages:
+    basename: messages,errors
 
 mybatis:
   configuration:
@@ -22,10 +23,6 @@ logging:
   level:
     root: info
     com.hocafe: debug
-
-spring:
-  messages:
-    basename: messages,errors
 
 file:
   dir:  /Users/eddy/Desktop/dev/project/cafe/cafe/src/main/resources/webapp/member/
