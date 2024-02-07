@@ -33,10 +33,9 @@
             </thead>
             <tbody>
             <tr th:each="cafe : ${cafes}">
-                <td><a href="cafe.html" th:href="@{/validation/v2/cafes/{cafeId}(cafeId=${cafe.id})}" th:text="${cafe.id}">카페id</a></td>
-                <td><a href="cafe.html" th:href="@{|/validation/v2/cafes/${cafe.id}|}" th:text="${cafe.cafeName}">카페이름</a></td>
-                <td th:text="${cafe.price}">10000</td>
-                <td th:text="${cafe.quantity}">10</td>
+                <td><a href="cafe.html" th:href="@{/cafes/{cafeId}(cafeId=${cafe.id})}" th:text="${cafe.id}">카페id</a></td>
+                <td><a href="cafe.html" th:href="@{|/cafes/${cafe.id}|}" th:text="${cafe.cafeName}">카페이름</a></td>
+                <td th:text="${cafe.address}">카페주소</td>
             </tr>
             </tbody>
         </table>

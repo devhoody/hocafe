@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -22,7 +24,7 @@ public class FileStore {
     }
 
     // 여러 파일 일때
-    public List<UploadFile> storeFiles(List<MultipartFile> multipartFiles){
+    public List<UploadFile> storeFiles(List<MultipartFile> multipartFiles) throws IOException {
         List<UploadFile> files = new ArrayList<>();
         for (MultipartFile multipartFile : multipartFiles) {
             if(!multipartFile.isEmpty()){
@@ -33,12 +35,14 @@ public class FileStore {
     }
 
     // 파일명 구하고 저장하기(확장명, uuid이용)
-    public UploadFile storeFile(MultipartFile multipartFile){
+    public UploadFile storeFile(MultipartFile multipartFile) throws IOException {
         if(multipartFile.isEmpty()){
             return null;
         }
         String uploadFilename = multipartFile.getOriginalFilename();
         String storeFilename = createStoreFilename(uploadFilename);
+
+        multipartFile.transferTo(new File(getFullPath(storeFilename)));
 
         return new UploadFile(uploadFilename, storeFilename);
     }

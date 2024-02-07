@@ -7,15 +7,16 @@ import com.hocafe.file.FileStore;
 import com.hocafe.repository.MemoryCafeRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
 
 @Controller
@@ -31,7 +32,8 @@ public class CafeController {
     @GetMapping
     public String Cafes(Model model){
         Cafe cafe = new Cafe();
-        model.addAttribute("cafe", cafe);
+        List<Cafe> cafes = cafeRepository.findAll();
+        model.addAttribute("cafes", cafes);
         return "/cafe/cafes";
     }
 
@@ -43,7 +45,7 @@ public class CafeController {
     }
 
     @PostMapping("add")
-    public String addCafe(@ModelAttribute CafeForm form, RedirectAttributes redirectAttributes){
+    public String addCafe(@ModelAttribute CafeForm form, RedirectAttributes redirectAttributes) throws IOException {
         MultipartFile mainImageFile = form.getMainImageFile();
         List<MultipartFile> imageFiles = form.getImageFiles();
         UploadFile uploadFile = fileStore.storeFile(mainImageFile);
@@ -56,11 +58,28 @@ public class CafeController {
         cafe.setImageFiles(uploadFiles);
         cafe.setMainImageFile(uploadFile);
 
-        cafeRepository.save(cafe);
+        Cafe savedCafe = cafeRepository.save(cafe);
         log.info("cafe = {} ", cafe.toString());
 
-        redirectAttributes.addAttribute("{cafeId}", cafe.getId());
+        log.info("cafeMainImage ={}", cafe.getMainImageFile().getStoreFileName());
+
+        redirectAttributes.addAttribute("cafeId", savedCafe.getId());
+        redirectAttributes.addAttribute("status", true);
 
         return "redirect:/cafes/{cafeId}";
+    }
+
+    @GetMapping("{id}")
+    public String viewCafe(@PathVariable(name = "id") Long id, Model model){
+        Cafe findCafe = cafeRepository.findById(id);
+        model.addAttribute(findCafe);
+        return "cafe/cafe";
+    }
+
+    @ResponseBody
+    @GetMapping("images/{filename}")
+    public Resource viewImage(@PathVariable(name = "filename") String filename) throws MalformedURLException {
+        String fullPath = fileStore.getFullPath(filename);
+        return new UrlResource("file:" + fullPath);
     }
 }
