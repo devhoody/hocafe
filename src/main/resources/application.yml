@@ -2,14 +2,14 @@ server:
   port: 8000
 
 spring:
-  datasource:
-    url: jdbc:h2:tcp://localhost/~/cafe
-    driver-class-name: org.h2.Driver
-    username: sa
-  jpa:
-    show-sql: true
-    hibernate:
-      ddl-auto: none
+#  datasource:
+#    url: jdbc:h2:tcp://localhost/~/cafe
+#    driver-class-name: org.h2.Driver
+#    username: sa
+#  jpa:
+#    show-sql: true
+#    hibernate:
+#      ddl-auto: none
   messages:
     basename: messages,errors
 
@@ -25,4 +25,4 @@ logging:
     com.hocafe: debug
 
 file:
-  dir:  /Users/eddy/Desktop/dev/project/cafe/cafe/src/main/resources/webapp/member/
+  dir:  /Users/eddy/Desktop/dev/project/cafe/cafe/src/main/resources/webapp/cafes/images/
